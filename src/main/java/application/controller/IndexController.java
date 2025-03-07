@@ -30,6 +30,7 @@ public String mensagem(@RequestParam int opcao, Model ui){
             break;
     }
     ui.addAttribute("texto", texto);
-    return "mensagem";
-}
+    return "WEB-INF/mensagem";
+    }
+
 }
