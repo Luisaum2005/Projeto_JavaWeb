@@ -5,7 +5,7 @@
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8">
-        <title>Editar Gênero</title>
+        <title>Editar Gênero</title> 
     </head>
     <body>
         <h1>Editar Gênero</h1>
