@@ -1,18 +1,18 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"  %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8">
-        <title>Formulario</title>
+        <title>Editar Gênero</title>
     </head>
     <body>
-        <h1>Editar Tarefas</h1>
-        <form action="/tarefas/update" method="post">
-            <input type="hidden" name="id" value="${tarefa.id}" />
-            <label>Descrição</label>
-            <input type="text" name="descricao" value="${tarefa.descricao}" />
+        <h1>Editar Gênero</h1>
+        <form action="/genero/update" method="post">
+            <input type="hidden" name="id" value="${genero.id}" />
+            <label>Nome</label>
+            <input type="text" name="nome" value="${genero.nome}" required/>
             <button type="submit">Salvar</button>
         </form>
     </body>

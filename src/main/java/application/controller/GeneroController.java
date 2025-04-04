@@ -9,19 +9,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import application.model.Tarefa;
-import application.repository.TarefaRepository;
-
+import application.model.Genero;
+import application.repository.GeneroRepository;
 
 @Controller
-@RequestMapping(value = {"/tarefas", "/"})
-public class TarefaController {
+@RequestMapping(value = {"/genero", "/"})
+public class GeneroController {
     @Autowired
-    private TarefaRepository tarefaRepo;
+    private GeneroRepository generoRepo;
 
     @RequestMapping(value = {"/list", ""})
     public String select(Model ui) {
-        ui.addAttribute("tarefas", tarefaRepo.findAll());
+        ui.addAttribute("generos", generoRepo.findAll());
         return "list";
     }
 
@@ -31,57 +30,50 @@ public class TarefaController {
     }
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public String insert(@RequestParam("descricao") String descricao){
-        Tarefa tarefa = new Tarefa();
-        tarefa.setDescricao(descricao);
+    public String insert(@RequestParam("nome") String nome){
+        Genero genero = new Genero();
+        genero.setNome(nome);
 
-        tarefaRepo.save(tarefa);
-        return "redirect:/tarefas/list";
+        generoRepo.save(genero);
+        return "redirect:/genero/list";
     }
 
     @RequestMapping("/update")
     public String update(@RequestParam("id") long id, Model ui) {
-        Optional<Tarefa> resultado = tarefaRepo.findById(id);
+        Optional<Genero> resultado = generoRepo.findById(id);
         if (resultado.isPresent()){
-            ui.addAttribute("tarefa", resultado.get());
+            ui.addAttribute("genero", resultado.get());
             return "formUpdate";
         }
-
-        return "redirect:/tarefas/list";
+        return "redirect:/genero/list";
     }
-
 
     @RequestMapping(value = "/update", method=RequestMethod.POST)
     public String update(
         @RequestParam("id") long id,
-        @RequestParam("descricao") String descricao) {
-            Optional<Tarefa> resultado = tarefaRepo.findById(id);
-
+        @RequestParam("nome") String nome) {
+            Optional<Genero> resultado = generoRepo.findById(id);
             if(resultado.isPresent()) {
-                resultado.get().setDescricao(descricao);
-
-                tarefaRepo.save(resultado.get());
+                Genero genero = resultado.get();
+                genero.setNome(nome);
+                generoRepo.save(genero);
             }
-
-            return "redirect:/tarefas/list";
-        }
+            return "redirect:/genero/list";
+    }
 
     @RequestMapping("/delete")
     public String delete(@RequestParam("id") long id, Model ui) {
-        Optional<Tarefa> resultado = tarefaRepo.findById(id);
-
+        Optional<Genero> resultado = generoRepo.findById(id);
         if (resultado.isPresent()) {
-            ui.addAttribute("tarefa", resultado.get());
+            ui.addAttribute("genero", resultado.get());
             return "formDelete";
         }
-
-        return "redirect:/tarefas/list";
+        return "redirect:/genero/list";
     }
 
     @RequestMapping(value = "/delete", method=RequestMethod.POST)
     public String delete(@RequestParam("id") long id) {
-        tarefaRepo.deleteById(id);
-        return "redirect:/tarefas/list";
-        }
-
+        generoRepo.deleteById(id);
+        return "redirect:/genero/list";
+    }
 }

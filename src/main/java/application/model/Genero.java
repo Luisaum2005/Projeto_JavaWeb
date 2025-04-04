@@ -8,12 +8,12 @@ import jakarta.persistence.GenerationType;
 
 
 @Entity
-@Table(name = "Tarefas")
-public class Tarefa{
+@Table(name = "Genero")
+public class Genero{
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
-    private String descricao;
+    private String nome;
 
     public void setId(long id){
         this.id = id;
@@ -23,11 +23,11 @@ public class Tarefa{
         return this.id;
     }
 
-    public void setDescricao(String descricao){
-        this.descricao = descricao;
+    public void setNome(String nome){
+        this.nome = nome;
     }
 
-    public String getDescricao(){
-        return this.descricao;
+    public String getNome(){
+        return this.nome;
     }
 }
